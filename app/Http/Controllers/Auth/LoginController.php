@@ -44,7 +44,7 @@ class LoginController extends Controller
   
         $this->validate($request, [
             'username' => 'required',
-            'password' => 'required',
+            'password' => 'required|string|min:6',
         ]);
   
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -53,7 +53,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         }else{
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error','Email/Username And Password Are Wrong.');
         }
     }
 }
